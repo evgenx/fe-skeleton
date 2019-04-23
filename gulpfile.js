@@ -9,6 +9,7 @@ const rename = require("gulp-rename");
 const sass = require("gulp-sass");
 const cssnano = require("gulp-cssnano");
 const rigger = require("gulp-rigger");
+const babel = require("gulp-babel");
 const uglify = require("gulp-uglify");
 const plumber = require("gulp-plumber");
 const imagemin = require("gulp-imagemin");
@@ -100,6 +101,9 @@ function js() {
         .pipe(plumber())
         .pipe(rigger())
         .pipe(gulp.dest(path.build.js))
+        .pipe(babel({
+            presets: ["@babel/preset-env"]
+        }))
         .pipe(uglify())
         .pipe(rename({
             suffix: ".min",
